@@ -61,7 +61,7 @@ class FlomoApi:
 
         # 过滤已删除的条目
         memo_list = response_json['data']
-        filtered_memo_list = [memo for memo in memo_list if not memo.get('deleted', False)]
+        filtered_memo_list = [memo for memo in memo_list if not memo.get('deleted_at', None)]
 
         return filtered_memo_list
 
