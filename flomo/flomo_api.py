@@ -63,7 +63,7 @@ class FlomoApi:
         memo_list = response_json['data']
         filtered_memo_list = [memo for memo in memo_list if not memo.get('deleted', False)]
 
-        return response_json['data']
+        return filtered_memo_list
 
     def get_login_wechat_qrcode(self):
         pass
