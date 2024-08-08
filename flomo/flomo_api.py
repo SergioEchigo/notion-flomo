@@ -59,6 +59,10 @@ class FlomoApi:
             print("get_memo_list business error:" + response_json['message'])
             return
 
+        # 过滤已删除的条目
+        memo_list = response_json['data']
+        filtered_memo_list = [memo for memo in memo_list if not memo.get('deleted', False)]
+
         return response_json['data']
 
     def get_login_wechat_qrcode(self):
