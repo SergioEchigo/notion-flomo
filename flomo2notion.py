@@ -90,7 +90,12 @@ class Flomo2Notion:
         notion_memo_list = self.notion_helper.query_all(self.notion_helper.page_id)
         slug_map = {}
         for notion_memo in notion_memo_list:
-            slug_map[notion_utils.get_rich_text_from_result(notion_memo, "slug")] = notion_memo.get("id")
+            slug = notion_utils.get_rich_text_from_result(notion_memo, "slug")
+            if slug is not None:
+                slug_map[slug] = notion_memo.get("id")
+            else:
+                # 处理 slug 为 None 的情况，跳过该条记录
+                continue
 
         # 3. 轮询flomo的列表数据
         for memo in memo_list:
