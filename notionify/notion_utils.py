@@ -104,7 +104,12 @@ def get_quote(content):
 
 
 def get_rich_text_from_result(result, name):
-    return result.get("properties").get(name).get("rich_text")[0].get("plain_text")
+    properties = result.get("properties")
+    if properties and name in properties:
+        rich_text = properties[name].get("rich_text")
+        if rich_text and len(rich_text) > 0:
+            return rich_text[0].get("plain_text")
+    return None
 
 
 def get_number_from_result(result, name):
